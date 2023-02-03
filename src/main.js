@@ -13,14 +13,13 @@ let actionMap = {
         ]
     },
     config: {
-        description: 'config .jmrc',
+        description: 'config .lrurc',
         usages: [
             'lru config set <k> <v>',
             'lru config get <k>',
-            'lru config remove <k>'
+            'lru config get',
         ]
     },
-    //other commands
 }
 Object.keys(actionMap).forEach(actionName => {
     let action = actionMap[actionName]
