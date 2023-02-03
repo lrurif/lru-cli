@@ -22,8 +22,8 @@ var _logSymbols2 = _interopRequireDefault(_logSymbols);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var HOME = process.env[process.platform === 'win32' ? 'USERPROFILE' : 'HOME'];
-var RC = exports.RC = HOME + "/.jmrc";
+const HOME = process.env[process.platform === 'win32' ? 'USERPROFILE' : 'HOME'];
+const RC = exports.RC = `${HOME}/.jmrc`;
 if (!_fs2.default.existsSync(RC)) {
     _fs2.default.writeFileSync(RC, JSON.stringify({
         registry: "lrurif"
@@ -35,32 +35,32 @@ function error(txt) {
 function set(key, value) {
 
     if (!key) {
-        return error("\u952E\u540D\u5FC5\u586B");
+        return error(`键名必填`);
     }
     if (!value) {
-        return error("\u503C\u5FC5\u586B");
+        return error(`值必填`);
     }
-    var data = JSON.parse(_fs2.default.readFileSync(RC).toString());
+    let data = JSON.parse(_fs2.default.readFileSync(RC).toString());
     if (data[key] === undefined) {
-        return error(key + "\u4E0D\u5B58\u5728");
+        return error(`${key}不存在`);
     }
     data[key] = value;
     _fs2.default.writeFileSync(RC, JSON.stringify(data, null, '\t'));
-    console.log(_logSymbols2.default.success, _chalk2.default.green("\u914D\u7F6E" + key + "\u6210\u529F"));
+    console.log(_logSymbols2.default.success, _chalk2.default.green(`配置${key}成功`));
 }
 function get(key) {
     if (!key) {
-        return error("\u952E\u540D\u5FC5\u586B");
+        return error(`键名必填`);
     }
-    var data = JSON.parse(_fs2.default.readFileSync(RC).toString());
+    let data = JSON.parse(_fs2.default.readFileSync(RC).toString());
     if (data[key] === undefined) {
-        return error(key + "\u4E0D\u5B58\u5728");
+        return error(`${key}不存在`);
     }
     return data[key];
 }
 function getAll() {
-    var data = JSON.parse(_fs2.default.readFileSync(RC).toString());
-    Object.keys(data).forEach(function (key) {
-        console.log(key + " = " + data[key]);
+    let data = JSON.parse(_fs2.default.readFileSync(RC).toString());
+    Object.keys(data).forEach(key => {
+        console.log(`${key} = ${data[key]}`);
     });
 }

@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _rw = require("./utils/rw.js");
 
-exports.default = function (action, key, value) {
+exports.default = (action, key, value) => {
     switch (action) {
         case "get":
             if (key) {

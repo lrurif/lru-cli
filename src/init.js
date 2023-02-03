@@ -21,7 +21,6 @@ export default (templateName, projectName) => {
     ]).then(async ({ description, author }) => {
         let loading = ora('downloading template ...').start();
         try {
-            console.log(description, author);
             await downloadTemplate(templateName, projectName);
             loading.succeed();
             const fileName = `${projectName}/package.json`;
